@@ -1,11 +1,8 @@
-<!DOCTYPE html>
-<html lang="id">
+<!DOCTYPE html><html lang="id">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Love Jefran</title>
-
-<style>
+<title>Untuk Jefran ❤️</title><style>
 *{
     margin:0;
     padding:0;
@@ -63,6 +60,7 @@ body{
         0 0 20px red,
         0 0 40px red;
     animation:glow 1.5s infinite alternate;
+    z-index:100;
 }
 
 @keyframes glow{
@@ -84,24 +82,38 @@ body{
         opacity:1;
     }
     100%{
-        transform:translateY(-100px);
+        transform:translateY(-120px);
         opacity:0;
     }
 }
-</style>
-</head>
 
-<body>
+.flying-photo{
+    position:fixed;
+    width:70px;
+    height:70px;
+    border-radius:50%;
+    object-fit:cover;
+    border:2px solid red;
+    box-shadow:0 0 15px red;
+    animation:flyPhoto 6s linear forwards;
+    pointer-events:none;
+}
 
-<audio autoplay loop controls>
+@keyframes flyPhoto{
+    0%{
+        transform:translateY(100vh) rotate(0deg);
+        opacity:1;
+    }
+    100%{
+        transform:translateY(-120px) rotate(360deg);
+        opacity:0;
+    }
+}
+</style></head><body><audio autoplay loop controls>
     <source src="lover.m4a" type="audio/mp4">
-</audio>
-
-<div class="heart" id="heart">
+</audio><div class="heart" id="heart">
     <div class="name">Jefran</div>
-</div>
-
-<script>
+</div><script>
 const heart = document.getElementById("heart");
 
 function createText(x,y){
@@ -132,6 +144,7 @@ for(let t=0; t<Math.PI*2; t+=0.08){
 }
 
 setInterval(() => {
+
     const h = document.createElement("div");
 
     h.className = "flying-heart";
@@ -146,7 +159,34 @@ setInterval(() => {
     }, 4000);
 
 }, 300);
-</script>
 
-</body>
+const photos = [
+    "foto1.jpg",
+    "foto2.jpg",
+    "foto3.jpg",
+    "foto4.jpg",
+    "foto5.jpg"
+];
+
+setInterval(() => {
+
+    const photo = document.createElement("img");
+
+    photo.src =
+    photos[Math.floor(
+    Math.random() * photos.length)];
+
+    photo.className = "flying-photo";
+
+    photo.style.left =
+    Math.random() * 100 + "vw";
+
+    document.body.appendChild(photo);
+
+    setTimeout(() => {
+        photo.remove();
+    }, 6000);
+
+}, 2000);
+</script></body>
 </html>
