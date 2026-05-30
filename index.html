@@ -1,9 +1,8 @@
-```html id="u8m7ja"
 <!DOCTYPE html>
 <html lang="id">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Love Jefran</title>
 
 <style>
@@ -20,7 +19,7 @@ body{
     display:flex;
     justify-content:center;
     align-items:center;
-    font-family:Arial, sans-serif;
+    font-family:Arial,sans-serif;
 }
 
 .heart{
@@ -47,12 +46,8 @@ body{
 }
 
 @keyframes float{
-    from{
-        transform:translateY(0px);
-    }
-    to{
-        transform:translateY(-6px);
-    }
+    from{transform:translateY(0);}
+    to{transform:translateY(-6px);}
 }
 
 .name{
@@ -71,17 +66,36 @@ body{
 }
 
 @keyframes glow{
-    from{
-        opacity:0.7;
-    }
-    to{
+    from{opacity:.7;}
+    to{opacity:1;}
+}
+
+.flying-heart{
+    position:fixed;
+    color:red;
+    font-size:24px;
+    pointer-events:none;
+    animation:fly 4s linear forwards;
+}
+
+@keyframes fly{
+    0%{
+        transform:translateY(100vh);
         opacity:1;
+    }
+    100%{
+        transform:translateY(-100px);
+        opacity:0;
     }
 }
 </style>
 </head>
 
 <body>
+
+<audio autoplay loop controls>
+    <source src="lover.m4a" type="audio/mp4">
+</audio>
 
 <div class="heart" id="heart">
     <div class="name">Jefran</div>
@@ -94,30 +108,45 @@ function createText(x,y){
     const span = document.createElement("span");
     span.className = "text";
     span.innerText = "I LOVE YOU";
-    span.style.left = `${x}px`;
-    span.style.top = `${y}px`;
-    span.style.animationDuration = (Math.random()*2+1)+"s";
+    span.style.left = x + "px";
+    span.style.top = y + "px";
+    span.style.animationDuration = (Math.random()*2+1) + "s";
     heart.appendChild(span);
 }
 
 const centerX = window.innerWidth / 2;
 const centerY = window.innerHeight / 2;
 
-for(let t = 0; t < Math.PI * 2; t += 0.08){
+for(let t=0; t<Math.PI*2; t+=0.08){
 
     let x = 16 * Math.pow(Math.sin(t),3);
     let y = 13 * Math.cos(t)
-            - 5 * Math.cos(2*t)
-            - 2 * Math.cos(3*t)
-            - Math.cos(4*t);
+          - 5 * Math.cos(2*t)
+          - 2 * Math.cos(3*t)
+          - Math.cos(4*t);
 
     x = x * 12 + centerX;
     y = -y * 12 + centerY;
 
     createText(x,y);
 }
+
+setInterval(() => {
+    const h = document.createElement("div");
+
+    h.className = "flying-heart";
+    h.innerHTML = "❤";
+
+    h.style.left = Math.random() * 100 + "vw";
+
+    document.body.appendChild(h);
+
+    setTimeout(() => {
+        h.remove();
+    }, 4000);
+
+}, 300);
 </script>
 
 </body>
 </html>
-```
